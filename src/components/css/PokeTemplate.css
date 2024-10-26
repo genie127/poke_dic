@@ -1,0 +1,8 @@
+*{box-sizing:border-box;   font-family: 'Noto Sans','Noto Sans KR','Apple SD Gothic Neo','맑은 고딕',sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;}
+body{ }
+
+.PokeTemplate{max-width:100%}
+.title{font-size:22px; padding: 20px 15px; font-weight:500; margin-bottom: 30px; background: #333; color:#fff;}
+
