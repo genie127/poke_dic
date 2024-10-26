@@ -1,7 +1,7 @@
 import PokeInsert from "./components/PokeInsert";
 import PokeList from "./components/PokeList";
 import PokeTemplate from "./components/PokeTemplate";
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 
 
 import './reset.css'
@@ -15,29 +15,30 @@ function App() {
   
   //포켓몬 추가
   const nextId = useRef(4);
-
-  const onSubmit = (name)=>{
-    const newForm ={id:nextId.current, name, img:`/images/${name}.png`, status:true};
-
-    setPokeList(pokeList.concat(newForm))
-
-    nextId.current += 1;
+  function need(){
+    alert('포켓몬 이름을 입력해주세요');
   }
+  const onSubmit = useCallback((name)=>{
+    const newForm ={id:nextId.current, name, img:`/images/${name}.png`, status:true};
+    name==''? need():
+    setPokeList(pokeList.concat(newForm))
+    nextId.current += 1;
+  },[pokeList])
 
   //포켓몬 삭제
-  const onDelete=(id)=>{
+  const onDelete=useCallback((id)=>{
     const deletePoke= pokeList.filter((poke)=>(poke.id !== id))
     setPokeList(deletePoke)
-  }
+  },[pokeList])
 
   //포켓몬 비활성화
-  const onToggle=(id)=>{
+  const onToggle=useCallback((id)=>{
     const offPoke = pokeList.map((poke)=>{
       return  poke.id==id?{...poke, status: !poke.status}:poke
       
     })
     setPokeList(offPoke)
-  }
+  },[pokeList])
 
   return (
     <div className="App">

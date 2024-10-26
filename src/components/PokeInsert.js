@@ -4,12 +4,12 @@ import React, { useState, useCallback } from 'react';
 const PokeInsert=({onSubmit})=>{
     
     const [inputName, setInputName] = useState()
-    const onChange =(e)=>{setInputName(e.target.value)}
-    const onInsert=(e)=>{
+    const onChange =useCallback((e)=>{setInputName(e.target.value)},[])
+    const onInsert=useCallback((e)=>{
         e.preventDefault();
         setInputName('');
         onSubmit(inputName);
-    }
+    },[inputName, onSubmit])
 
     return(
         <form className="pokeInsert" onSubmit={onInsert}>
